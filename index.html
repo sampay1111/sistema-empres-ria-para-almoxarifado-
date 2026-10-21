@@ -1,0 +1,93 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101827">
+  <title>Almoxarifado Inteligente</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/javascript.js" defer></script>
+</head>
+<body>
+  <section id="loginScreen" class="login-screen">
+    <form id="loginForm" class="login-card">
+      <div class="brand-mark">AI</div>
+      <p class="eyebrow">CONTROLE INTELIGENTE</p>
+      <h1>Almoxarifado</h1>
+      <p class="muted">Entre para acessar seu estoque.</p>
+      <label for="loginEmail">E-mail</label>
+      <input id="loginEmail" type="email" autocomplete="username" required placeholder="admin@empresa.com">
+      <label for="loginPassword">Senha</label>
+      <input id="loginPassword" type="password" autocomplete="current-password" required placeholder="Sua senha">
+      <button class="btn primary full" type="submit">Entrar</button>
+      <p id="loginError" class="error-text" role="alert"></p>
+      <p class="tiny muted">O administrador inicial é configurado nas variáveis da Render.</p>
+    </form>
+  </section>
+
+  <div id="appShell" class="app-shell hidden">
+    <aside id="sidebar" class="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-mark small-mark">AI</div>
+        <div><strong>Almoxarifado</strong><small>INTELIGENTE</small></div>
+        <button id="closeMenu" class="icon-btn mobile-only" aria-label="Fechar menu">✕</button>
+      </div>
+      <nav id="navigation">
+        <button class="nav-btn active" data-page="dashboard"><span>▦</span> Painel</button>
+        <button class="nav-btn" data-page="products"><span>▣</span> Produtos</button>
+        <button class="nav-btn" data-page="movements"><span>⇄</span> Movimentações</button>
+        <button class="nav-btn" data-page="notes"><span>✎</span> Anotações do dia</button>
+        <button class="nav-btn" data-page="alerts"><span>⚠</span> Alertas de estoque</button>
+        <button class="nav-btn" data-page="suppliers"><span>♧</span> Fornecedores</button>
+        <button class="nav-btn" data-page="reports"><span>▤</span> Relatórios e backup</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <span id="connectionStatus" class="status-pill">● Conectando...</span>
+        <button id="logoutBtn" class="nav-btn logout-btn"><span>↪</span> Sair da conta</button>
+      </div>
+    </aside>
+
+    <div id="sidebarOverlay" class="sidebar-overlay"></div>
+
+    <main class="main-area">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button id="menuBtn" class="icon-btn" aria-label="Abrir menu">☰</button>
+          <div><p class="eyebrow">GESTÃO DE ESTOQUE</p><h1 id="pageTitle">Painel</h1></div>
+        </div>
+        <div class="topbar-actions">
+          <button id="refreshBtn" class="icon-btn" title="Atualizar dados" aria-label="Atualizar">↻</button>
+          <button id="settingsBtn" class="icon-btn gear-btn" title="Configurações e idioma" aria-label="Configurações">⚙</button>
+          <div id="userAvatar" class="avatar">A</div>
+        </div>
+      </header>
+
+      <section id="settingsPanel" class="settings-panel hidden">
+        <div>
+          <strong>Configurações</strong>
+          <p class="muted tiny">Idioma da interface e conta atual.</p>
+        </div>
+        <label for="languageSelect">Idioma / Language / Idioma</label>
+        <select id="languageSelect">
+          <option value="pt">Português</option>
+          <option value="en">English</option>
+          <option value="es">Español</option>
+        </select>
+        <p id="settingsUser" class="tiny muted"></p>
+      </section>
+
+      <div id="content" class="content">
+        <div id="loading" class="loading-card">
+          <div class="spinner"></div>
+          <p>Carregando sistema...</p>
+        </div>
+      </div>
+      <footer class="app-footer">Almoxarifado Inteligente <span id="footerYear"></span></footer>
+    </main>
+  </div>
+
+  <div id="modalRoot"></div>
+  <div id="toastRoot" class="toast-root" aria-live="polite"></div>
+</body>
+</html>
