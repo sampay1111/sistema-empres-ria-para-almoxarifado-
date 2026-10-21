@@ -1,0 +1,223 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101827">
+  <meta name="description" content="Sistema de controle de estoque e almoxarifado">
+  <title>Almoxarifado Inteligente</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/javascript.js" defer></script>
+</head>
+<body>
+
+  <!-- TELA DE LOGIN -->
+  <section id="loginScreen" class="login-screen">
+    <div class="login-card">
+      <div class="brand-logo">AI</div>
+      <p class="eyebrow">GESTÃO INTELIGENTE</p>
+      <h1>Almoxarifado</h1>
+      <p class="muted">Entre para acessar seu sistema de estoque.</p>
+
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="loginEmail">E-mail</label>
+          <input
+            id="loginEmail"
+            type="email"
+            placeholder="seu@email.com"
+            autocomplete="username"
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="loginPassword">Senha</label>
+          <input
+            id="loginPassword"
+            type="password"
+            placeholder="Digite sua senha"
+            autocomplete="current-password"
+            required
+          >
+        </div>
+
+        <p id="loginError" class="error-message" role="alert"></p>
+
+        <button type="submit" class="btn primary login-submit">
+          Entrar no sistema
+        </button>
+      </form>
+
+      <p class="login-footer">Acesso protegido por autenticação.</p>
+    </div>
+  </section>
+
+  <!-- APLICAÇÃO PRINCIPAL -->
+  <div id="appShell" class="app-shell hidden">
+
+    <!-- FUNDO DO MENU MOBILE -->
+    <div id="sidebarOverlay" class="sidebar-overlay"></div>
+
+    <!-- MENU LATERAL -->
+    <aside id="sidebar" class="sidebar">
+
+      <div class="sidebar-brand">
+        <div class="brand-logo small-logo">AI</div>
+        <div class="brand-text">
+          <strong>Almoxarifado</strong>
+          <span>Inteligente</span>
+        </div>
+        <button
+          id="closeMenu"
+          class="icon-btn mobile-only"
+          type="button"
+          aria-label="Fechar menu"
+        >✕</button>
+      </div>
+
+      <div class="sidebar-section-title">MENU PRINCIPAL</div>
+
+      <nav class="sidebar-nav" aria-label="Navegação principal">
+        <button class="nav-btn active" data-page="dashboard" type="button">
+          <span>▦</span> Painel
+        </button>
+
+        <button class="nav-btn" data-page="products" type="button">
+          <span>▣</span> Produtos
+        </button>
+
+        <button class="nav-btn" data-page="movements" type="button">
+          <span>⇄</span> Movimentações
+        </button>
+
+        <button class="nav-btn" data-page="notes" type="button">
+          <span>▤</span> Anotações do dia
+        </button>
+
+        <button class="nav-btn" data-page="alerts" type="button">
+          <span>⚠</span> Alertas de estoque
+        </button>
+
+        <button class="nav-btn" data-page="suppliers" type="button">
+          <span>♧</span> Fornecedores
+        </button>
+
+        <button class="nav-btn" data-page="reports" type="button">
+          <span>▥</span> Relatórios e backup
+        </button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="connection-card">
+          <span class="connection-dot"></span>
+          <span id="connectionStatus">Aguardando conexão...</span>
+        </div>
+
+        <div class="user-mini">
+          <div id="userAvatar" class="avatar">A</div>
+          <div class="user-mini-info">
+            <strong>Usuário conectado</strong>
+            <span id="settingsUser">Sua conta</span>
+          </div>
+        </div>
+
+        <button id="logoutBtn" class="nav-btn logout-btn" type="button">
+          <span>↪</span> Sair da conta
+        </button>
+      </div>
+    </aside>
+
+    <!-- ÁREA PRINCIPAL -->
+    <main class="main-area">
+
+      <header class="topbar">
+        <div class="topbar-left">
+          <button
+            id="menuBtn"
+            class="icon-btn menu-toggle"
+            type="button"
+            aria-label="Abrir menu"
+          >☰</button>
+
+          <div class="topbar-heading">
+            <span class="eyebrow">GESTÃO DE ESTOQUE</span>
+            <h1 id="pageTitle">Painel</h1>
+          </div>
+        </div>
+
+        <div class="topbar-actions">
+          <button
+            id="refreshBtn"
+            class="icon-btn"
+            type="button"
+            title="Atualizar dados"
+            aria-label="Atualizar dados"
+          >↻</button>
+
+          <button
+            id="settingsBtn"
+            class="icon-btn"
+            type="button"
+            title="Configurações e idioma"
+            aria-label="Configurações e idioma"
+          >⚙</button>
+        </div>
+      </header>
+
+      <!-- CONFIGURAÇÕES E IDIOMA -->
+      <section id="settingsPanel" class="settings-panel hidden">
+        <div class="settings-heading">
+          <div>
+            <h2>⚙ Configurações</h2>
+            <p class="muted">Personalize seu sistema.</p>
+          </div>
+        </div>
+
+        <div class="settings-row">
+          <div>
+            <strong>Idioma do sistema</strong>
+            <p class="muted tiny">Escolha o idioma dos menus.</p>
+          </div>
+
+          <select id="languageSelect" aria-label="Idioma do sistema">
+            <option value="pt">🇧🇷 Português</option>
+            <option value="en">🇺🇸 English</option>
+            <option value="es">🇪🇸 Español</option>
+          </select>
+        </div>
+
+        <div class="settings-row">
+          <div>
+            <strong>Conta conectada</strong>
+            <p id="settingsUserInfo" class="muted tiny">Usuário autenticado</p>
+          </div>
+          <span class="badge ok">Conectado</span>
+        </div>
+      </section>
+
+      <!-- O JAVASCRIPT MONTA AS TELAS AQUI -->
+      <section id="content" class="content-area" aria-live="polite">
+        <div class="loading-screen">
+          <div class="loading-spinner"></div>
+          <p>Carregando sistema...</p>
+        </div>
+      </section>
+
+      <footer class="app-footer">
+        <span id="footerYear"></span>
+        <span>Almoxarifado Inteligente</span>
+      </footer>
+
+    </main>
+  </div>
+
+  <!-- JANELAS MODAIS -->
+  <div id="modalRoot"></div>
+
+  <!-- NOTIFICAÇÕES -->
+  <div id="toastRoot" class="toast-container" aria-live="polite"></div>
+
+</body>
+</html>
